@@ -1,0 +1,87 @@
+[gd_scene load_steps=18 format=3 uid="uid://difncpec7tmnn"]
+
+[ext_resource type="Script" path="res://scripts/pacman.gd" id="1_tgkds"]
+[ext_resource type="Texture2D" uid="uid://bbgj23q7gam4f" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_01.png" id="2_nu26v"]
+[ext_resource type="Texture2D" uid="uid://vxf8adm234y3" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_02.png" id="3_eqr8v"]
+[ext_resource type="Texture2D" uid="uid://coy4joj7785kn" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_03.png" id="4_y36hj"]
+[ext_resource type="Texture2D" uid="uid://dc32pr4l0exr7" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_04.png" id="5_gcwi5"]
+[ext_resource type="Texture2D" uid="uid://bghyra350hdga" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_05.png" id="6_ps3a3"]
+[ext_resource type="Texture2D" uid="uid://bs55ta550rsj3" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_06.png" id="7_051v1"]
+[ext_resource type="Texture2D" uid="uid://c3dh7n3hysm7o" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_07.png" id="8_j5nty"]
+[ext_resource type="Texture2D" uid="uid://d30tk7uppyp8r" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_08.png" id="9_h282b"]
+[ext_resource type="Texture2D" uid="uid://bm2447s8rp6kl" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_09.png" id="10_k48w1"]
+[ext_resource type="Texture2D" uid="uid://malqtxrid8h4" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_10.png" id="11_tn6fp"]
+[ext_resource type="Texture2D" uid="uid://2xj6ip5thdc6" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_11.png" id="12_cn16g"]
+[ext_resource type="Texture2D" uid="uid://b25vol0yp53n4" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_01.png" id="13_2ca8u"]
+[ext_resource type="Texture2D" uid="uid://h71ud3s8c8n3" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_02.png" id="14_k5g3r"]
+[ext_resource type="Texture2D" uid="uid://dn5n35q1uw6no" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_03.png" id="15_qbrdn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8t3ej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nu26v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eqr8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y36hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gcwi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ps3a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_051v1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_j5nty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_h282b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k48w1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tn6fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cn16g")
+}],
+"loop": true,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2ca8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_k5g3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_qbrdn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sie2v"]
+
+[node name="Pacman" type="CharacterBody2D"]
+motion_mode = 1
+floor_stop_on_slope = false
+platform_on_leave = 2
+script = ExtResource("1_tgkds")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_8t3ej")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sie2v")
