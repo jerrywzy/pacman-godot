@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://difncpec7tmnn"]
+[gd_scene load_steps=18 format=3 uid="uid://difncpec7tmnn"]
 
 [ext_resource type="Script" path="res://scripts/pacman.gd" id="1_tgkds"]
 [ext_resource type="Texture2D" uid="uid://bbgj23q7gam4f" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_Death_01.png" id="2_nu26v"]
@@ -71,38 +71,21 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sie2v"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igvm5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbp8n"]
 
 [node name="Pacman" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
+collision_mask = 13
 motion_mode = 1
 floor_stop_on_slope = false
 platform_on_leave = 2
 script = ExtResource("1_tgkds")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_8t3ej")
 frame = 1
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_sie2v")
-
-[node name="DirectionCollider" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionCollider"]
-shape = SubResource("RectangleShape2D_igvm5")
-
-[node name="Raycasts" type="Node2D" parent="."]
-
-[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
-position = Vector2(0, -8)
-exclude_parent = false
-target_position = Vector2(10, 0)
-
-[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
-position = Vector2(0, 8)
-exclude_parent = false
-target_position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_mbp8n")

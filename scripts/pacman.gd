@@ -1,38 +1,68 @@
 extends CharacterBody2D
+class_name Player
 
-var speed = 100.0
-var tile_size = 24
-var current_direction = Vector2.ZERO
-var target_direction = Vector2.ZERO
-@onready var raycasts = $Raycasts
-@onready var raycast_a = $Raycasts/RayCast2D
-@onready var raycast_b = $Raycasts/RayCast2D2
+@export var speed := 175
+@export var current_dir = "none"
+@export var movement_direction := Vector2.ZERO
+var movement_enabled = true
+var vel := Vector2()
+var inputs = {"right": Vector2.RIGHT,
+			"left": Vector2.LEFT,
+			"up": Vector2.UP,
+			"down": Vector2.DOWN}
 
-func _ready():
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
+func get_input():
+	if movement_enabled:
+		vel = Vector2()
+		for input in inputs:
+			if Input.is_action_just_pressed(input):
+				current_dir = input
+				movement_direction = inputs[input]
+				animate_movement()
+		
+		vel = movement_direction * speed
+
+
+func animate_movement():
+	#$Sprite2D.play("eating")
+	match current_dir:
+		"right":
+			$AnimatedSprite2D.rotation_degrees = 0
+			$AnimatedSprite2D.flip_h = false
+		"left":
+			$AnimatedSprite2D.rotation_degrees = 0
+			$AnimatedSprite2D.flip_h = true
+		"up":
+			$AnimatedSprite2D.rotation_degrees = -90
+			$AnimatedSprite2D.flip_h = false
+		"down":
+			$AnimatedSprite2D.rotation_degrees = 90
+			$AnimatedSprite2D.flip_h = false
+
+func _physics_process(_delta):
+	if !movement_enabled:
+		return
 	
+	get_input()
+	set_velocity(vel)
+	move_and_slide()
+	vel = vel
+	if vel.length() < 1 and movement_direction != Vector2.ZERO:
+		movement_direction = Vector2.ZERO
+		current_dir = "none"
+		#$Sprite2D.playing = false
 
-func _physics_process(delta):
-	if target_direction:  # if there is input
-		move(target_direction)  # check target direction if valid
 
-func _input(event):
-	if event.is_action_pressed("left"):
-		raycasts.rotation = PI
-		target_direction = Vector2.LEFT
-	if event.is_action_pressed("right"):
-		raycasts.rotation = 0
-		target_direction = Vector2.RIGHT
-	if event.is_action_pressed("up"):
-		raycasts.rotation = -(PI / 2)
-		target_direction = Vector2.UP
-	if event.is_action_pressed("down"):
-		raycasts.rotation = PI / 2
-		target_direction = Vector2.DOWN
+func warp_to(pos):
+	global_position = pos
 
-func move(target):
-	if not raycast_a.is_colliding() and not raycast_b.is_colliding():
-		position += target * tile_size * 0.1
-	else:
-		pass
+
+#func reset():
+	#if $Sprite2D.is_connected("animation_finished", Callable(self, "reset")):
+		#$Sprite2D.disconnect("animation_finished", Callable(self, "reset"))
+	#position = Vector2(264, 212)
+	#$Sprite2D.play("idle")
+	#current_dir = "none"
+	#movement_direction = Vector2.ZERO
+	#emit_signal("player_reset")
+
