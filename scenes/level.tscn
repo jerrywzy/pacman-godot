@@ -516,7 +516,7 @@ layer_1/name = "Pellets"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Pacman" parent="." instance=ExtResource("1_2xyeq")]
-position = Vector2(-108, 12)
+position = Vector2(-114, 25)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 62)

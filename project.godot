@@ -21,7 +21,7 @@ aseprite_executable_path="C:/Users/User/Downloads/Aseprite-v1.3.4-trial-Portable
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/nklbdev.aseprite_importers/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
