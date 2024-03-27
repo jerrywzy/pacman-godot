@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://0kyaf46i3qt8"]
+
+[ext_resource type="FontFile" uid="uid://82qiek2at43a" path="res://assets/Game_Sean_Denny.ttf" id="1_8jurb"]
+[ext_resource type="Texture2D" uid="uid://h71ud3s8c8n3" path="res://assets/wojciech-bilicki-Assets/Pacman/Pacman_02.png" id="2_pa5sf"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Lives" type="Label" parent="."]
+offset_left = 17.0
+offset_top = 12.0
+offset_right = 91.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("1_8jurb")
+theme_override_font_sizes/font_size = 50
+text = "Lives:"
+
+[node name="Score" type="Label" parent="."]
+offset_left = 17.0
+offset_top = 48.0
+offset_right = 91.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("1_8jurb")
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 94.0
+offset_top = 16.0
+offset_right = 116.0
+offset_bottom = 38.0
+texture = ExtResource("2_pa5sf")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 123.0
+offset_top = 16.0
+offset_right = 145.0
+offset_bottom = 38.0
+texture = ExtResource("2_pa5sf")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 152.0
+offset_top = 16.0
+offset_right = 174.0
+offset_bottom = 38.0
+texture = ExtResource("2_pa5sf")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://p6oitth6jhdc"]
+
+[ext_resource type="Texture2D" uid="uid://doq0aalcuv5a" path="res://assets/wojciech-bilicki-Assets/Pellet/pellets.png" id="1_jmu8v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5l8c6"]
+radius = 3.0
+
+[node name="SmallPellet" type="Area2D" groups=["SmallPellets"]]
+collision_layer = 8
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jmu8v")
+region_enabled = true
+region_rect = Rect2(36, 4, 12, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5l8c6")

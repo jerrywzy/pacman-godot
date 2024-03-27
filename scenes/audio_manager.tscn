@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2wenes0dae1a"]
+
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_i8jon"]
+[ext_resource type="AudioStream" uid="uid://bhkaxukpaxmry" path="res://assets/Sounds/pacman_chomp_fixed_loop.mp3" id="1_suxx3"]
+[ext_resource type="AudioStream" uid="uid://bd8nhaw0a1df8" path="res://assets/Sounds/pacman_beginning.wav" id="2_vooda"]
+[ext_resource type="AudioStream" uid="uid://dn0p0lnq4pao0" path="res://assets/Sounds/pacman_death.wav" id="3_0chy8"]
+[ext_resource type="AudioStream" uid="uid://bp7yic5euxcdq" path="res://assets/Sounds/pacman_eatfruit.wav" id="4_y2kxu"]
+[ext_resource type="AudioStream" uid="uid://bu4gbq22fgi5w" path="res://assets/Sounds/pacman_eatghost.wav" id="5_k7ily"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_i8jon")
+
+[node name="PacmanChomp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_suxx3")
+
+[node name="PacmanStart" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_vooda")
+
+[node name="PacmanDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0chy8")
+
+[node name="PacmanEatFruit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y2kxu")
+
+[node name="PacmanEatGhost" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_k7ily")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0vond12aw67s"]
+
+[ext_resource type="PackedScene" uid="uid://dnjs2fjqmwban" path="res://scenes/Ghost.tscn" id="1_cntdh"]
+[ext_resource type="Script" path="res://scripts/clyde.gd" id="2_x1yyx"]
+
+[node name="Clyde" instance=ExtResource("1_cntdh")]
+script = ExtResource("2_x1yyx")
+
+[node name="BodySprite" parent="." index="0"]
+modulate = Color(1, 0.313726, 0, 1)
+
+[node name="GhostChase" parent="StateMachine" index="1" node_paths=PackedStringArray("ghost_sprite", "eye_sprite")]
+ghost_sprite = NodePath("../../BodySprite")
+eye_sprite = NodePath("../../EyeSprite")
+
+[node name="GhostScatter" parent="StateMachine" index="2" node_paths=PackedStringArray("eye_sprite")]
+eye_sprite = NodePath("../../EyeSprite")

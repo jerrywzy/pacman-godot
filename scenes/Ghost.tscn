@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnjs2fjqmwban"]
+
+[ext_resource type="Texture2D" uid="uid://bwh3pnp6rcycn" path="res://assets/wojciech-bilicki-Assets/Ghost/Ghost_Body_01.png" id="2_ebwuq"]
+[ext_resource type="Texture2D" uid="uid://gcljnvys5tll" path="res://assets/wojciech-bilicki-Assets/Ghost/Ghost_Eyes_Down.png" id="3_5xrnc"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="4_m67ir"]
+[ext_resource type="Script" path="res://scripts/ghost_idle.gd" id="5_ydl6o"]
+[ext_resource type="Script" path="res://scripts/ghost_chase.gd" id="6_6cavp"]
+[ext_resource type="Script" path="res://scripts/ghost_retreat.gd" id="7_pkp4x"]
+[ext_resource type="Script" path="res://scripts/ghost_scatter.gd" id="7_rydrh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mh46x"]
+
+[node name="Ghost" type="Area2D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_ebwuq")
+
+[node name="EyeSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_5xrnc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mh46x")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_m67ir")
+initial_state = NodePath("GhostIdle")
+
+[node name="GhostIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_ydl6o")
+enemy = NodePath("../..")
+
+[node name="GhostChase" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_6cavp")
+enemy = NodePath("../..")
+
+[node name="GhostScatter" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "ghost_sprite")]
+script = ExtResource("7_rydrh")
+enemy = NodePath("../..")
+ghost_sprite = NodePath("../../BodySprite")
+target_scatter_position = Vector2(-300, -275)
+
+[node name="GhostRetreat" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "ghost_sprite", "eye_sprite")]
+script = ExtResource("7_pkp4x")
+enemy = NodePath("../..")
+ghost_sprite = NodePath("../../BodySprite")
+eye_sprite = NodePath("../../EyeSprite")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo6kqgblfge6x"]
+
+[ext_resource type="PackedScene" uid="uid://dnjs2fjqmwban" path="res://scenes/Ghost.tscn" id="1_05lux"]
+[ext_resource type="Script" path="res://scripts/blinky.gd" id="1_y6adm"]
+
+[node name="Blinky" instance=ExtResource("1_05lux")]
+script = ExtResource("1_y6adm")
+
+[node name="BodySprite" parent="." index="0"]
+modulate = Color(1, 0, 0, 1)
+
+[node name="GhostChase" parent="StateMachine" index="1" node_paths=PackedStringArray("ghost_sprite", "eye_sprite")]
+ghost_sprite = NodePath("../../BodySprite")
+eye_sprite = NodePath("../../EyeSprite")
+
+[node name="GhostScatter" parent="StateMachine" index="2" node_paths=PackedStringArray("eye_sprite")]
+eye_sprite = NodePath("../../EyeSprite")

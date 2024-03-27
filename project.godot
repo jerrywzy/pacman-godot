@@ -19,6 +19,15 @@ config/icon="res://icon.svg"
 
 aseprite_executable_path="C:/Users/User/Downloads/Aseprite-v1.3.4-trial-Portable/Aseprite-v1.3.4-trial/Aseprite.exe"
 
+[autoload]
+
+GameManager="*res://scenes/game_manager.tscn"
+AudioManager="*res://scenes/audio_manager.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
