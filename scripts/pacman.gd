@@ -89,12 +89,16 @@ func _on_area_2d_area_entered(area):
 				die()
 	if area.is_in_group("SmallPellets"):
 		small_pellet_eaten.emit()
-		area.queue_free()
+		area.hide()
+		var collision_shape_2d = str(get_path_to(area)) + "/CollisionShape2D"
+		get_node(collision_shape_2d).set_deferred("disabled", true)
 	if area.is_in_group("PowerPellets"):
 		AudioManager.pacman_eat_fruit.play()
 		powered = true
 		power_pellet_eaten.emit()
-		area.queue_free()
+		area.hide()
+		var collision_shape_2d = str(get_path_to(area)) + "/CollisionShape2D"
+		get_node(collision_shape_2d).set_deferred("disabled", true)
 		$PowerTimer.start()
 
 func die():
@@ -104,7 +108,6 @@ func die():
 	$AnimatedSprite2D.play("death")
 	AudioManager.pacman_death.play()
 	AudioManager.pacman_chomp.stop()
-	print(GameManager.lives)
 
 func _on_power_timer_timeout():
 	powered = false

@@ -17,7 +17,6 @@ func enter():
 		"Clyde":
 			level.clyde_start_chase.connect(start_chase)
 			if GameManager.clyde_activated:
-				print("ClydeChaseAgain")
 				Transitioned.emit(self, "GhostChase")  # immediately chase again if Clyde and is activated 
 
 func start_chase():

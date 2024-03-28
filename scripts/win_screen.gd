@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var level_scene: PackedScene = load("res://scenes/level.tscn")
+@onready var level = $"../"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,5 +13,5 @@ func _process(delta):
 
 
 func _on_button_pressed():
-	get_tree().reload_current_scene()
+	level.reset_level()
 	

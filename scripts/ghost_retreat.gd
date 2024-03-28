@@ -1,6 +1,8 @@
 extends State
 class_name GhostRetreat
 
+signal retreat_finished
+
 @onready var tilemap: TileMap = $"../../../TileMap"
 @onready var player = $"../../../Pacman"
 @onready var ghost_name = $"../..".name
@@ -80,6 +82,7 @@ func Physics_Update(delta):
 		if ghost_sprite.global_position == Vector2(12, 36):  # if arrived at pen tile coords
 			ghost_sprite.show()
 			collision_shape_2d.set_deferred("disabled", false)
+			retreat_finished.emit()
 			Transitioned.emit(self, "GhostIdle")
 		
 		is_moving = false  # else if arrived, no longer moving

@@ -14,7 +14,8 @@ var is_moving: bool
 var astar_grid: AStarGrid2D
 var scatter_timer: Timer
 @onready var initial_color: Color = ghost_sprite.modulate
-var is_scattering: bool
+var is_scattering: bool = false
+var blue_scatter_color: Color = Color("0011ff")
 
 func enter():
 	is_scattering = true
@@ -22,7 +23,7 @@ func enter():
 	GameManager.global_scatter_ending.connect(scatter_ending_flash)
 	GameManager.global_begin_retreat.connect(retreat_ghost.bind())
 	# change the ghost color
-	ghost_sprite.modulate = Color("0011ff")
+	ghost_sprite.modulate = blue_scatter_color
 	# initialize astar grid, from Retrobright's tutorial
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()  # set astar grid region to tilemap_rect
@@ -90,32 +91,33 @@ func Physics_Update(delta):
 		
 func retreat_ghost(ghost_to_retreat):
 	if ghost_to_retreat == ghost_name:
+		ghost_sprite.modulate = initial_color
 		Transitioned.emit(self, "GhostRetreat")
 
 func on_scatter_timer_timeout():
+	ghost_sprite.modulate = initial_color
 	Transitioned.emit(self, "GhostChase")
 
 func scatter_ending_flash():
 	if is_scattering:
-		var original_color = ghost_sprite.modulate
 		var tween = get_tree().create_tween()
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", blue_scatter_color, 0.1)
 		tween.tween_property(ghost_sprite, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(ghost_sprite, "modulate", original_color, 0.1)
+		tween.tween_property(ghost_sprite, "modulate", initial_color, 0.1)
